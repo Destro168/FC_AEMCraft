@@ -24,7 +24,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-
 public class FC_AEMCraft extends JavaPlugin
 {
 	public static final DecimalFormat df = new DecimalFormat("#.#");
