@@ -1,0 +1,8 @@
+name: FC_AEMCraft
+main: me.Destro168.FC_AEMCraft.FC_AEMCraft
+version: 1.4
+description: Custom Plugin for FC_AEMCraft.
+commands:
+   aem:
+      description: Handles aemcraft commands.
+depend: [FC_Suite_Shared]

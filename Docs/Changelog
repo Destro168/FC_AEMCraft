@@ -1,0 +1,26 @@
+~ FC_AEMCraft Changelog ~
+
+Version 1.4:
+
+- Check the FC_Suite_Shared changelog for information about this update. The big change is the userinfo folder information. Check it out!
+
+Version 1.3:
+
+- Fixed Track command to track other players now.
+
+Version 1.2:
+
+- Updated format and colors for /aem mList.
+
+Version 1.1
+
+- Built for CB 1.3.2 R2.0
+- Merged together FC_PlayerTracker and FC_Mine4Cash to create FC_AemCraft. Caused lots of renaming. Check new permissions in permissions.txt.
+- To upgrade, please move the files from both your ~/plugins/FC_PlayerTracker and ~/plugins/FC_Mine4Cash folders into ~/plugins/FC_AemCraft. Default folder structure is included in this package.
+- Brought plugin up to much higher standard by adding things I had previously neglected for sake of speed.
+- Added enable/disable messages.
+- The command to use now is /aem. This is the root which brings up help for all aem commands. Several commands added under /aem to help with management in-game.
+
+Version 1.0
+
+- Initial Release
