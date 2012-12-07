@@ -1,5 +1,15 @@
 ~ FC_AEMCraft Changelog ~
 
+Version 1.5:
+
+General:
+- Updated the package structure heavily. No need for zips anymore. Also internal code restructuring.
+- Added two leaderboards and commands for both to see most played and most chatty. Leaderboard commands require track command permission.
+- Reworked command permissions a bit. Requires track permission to see leaderboard command help.
+
+Installation:
+- FC_Suite_Shared is now it's own seperate plugin! Check it out -> http://dev.bukkit.org/server-mods/fc_suite_shared/
+
 Version 1.4:
 
 - Check the FC_Suite_Shared changelog for information about this update. The big change is the userinfo folder information. Check it out!

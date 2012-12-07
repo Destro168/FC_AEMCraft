@@ -1,4 +1,4 @@
-package me.Destro168.Configs;
+package me.Destro168.FC_AEMCraft.Configs;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,8 +10,8 @@ import java.util.Random;
 
 import org.bukkit.Location;
 
-import me.Destro168.ConfigManagers.ConfigGod;
-import me.Destro168.ConfigManagers.CustomConfigurationManager;
+import me.Destro168.FC_Suite_Shared.ConfigManagers.ConfigGod;
+import me.Destro168.FC_Suite_Shared.ConfigManagers.FileConfigurationWrapper;
 import me.Destro168.FC_AEMCraft.FC_AEMCraft;
 
 public class MiningConfig extends ConfigGod
@@ -21,24 +21,24 @@ public class MiningConfig extends ConfigGod
 	public double minimum;
 	private Calendar cal = new GregorianCalendar();
 	private String loggingPrefix = "Logging.";
-	CustomConfigurationManager lccm;
+	FileConfigurationWrapper lfcw;
 	
-	public void setExploitPrevention(boolean x) { ccm.set(prefix + "exploitPrevention", x); }
-	public void setLogCheckTime(int x) { ccm.set(prefix + "logCheckTime", x); }
-	public void setBlockValueMinimum(double x) { ccm.set(prefix + "blockValueMinimum", x); }
-	public void setHarvestableFlux(int x) { ccm.set(prefix + "harvestableFlux", x); }
-	public void setHarvestableIDs(List<?> x) { ccm.setCustomList(prefix + "harvestable.IDs", x); }
-	public void setHarvestableValues(List<?> x) { ccm.setCustomList(prefix + "harvestable.Values", x); }
-	public void setHarvestableVisible(List<?> x) { ccm.setCustomList(prefix + "harvestable.Visible", x); }
+	public void setExploitPrevention(boolean x) { fcw.set(prefix + "exploitPrevention", x); }
+	public void setLogCheckTime(int x) { fcw.set(prefix + "logCheckTime", x); }
+	public void setBlockValueMinimum(double x) { fcw.set(prefix + "blockValueMinimum", x); }
+	public void setHarvestableFlux(int x) { fcw.set(prefix + "harvestableFlux", x); }
+	public void setHarvestableIDs(List<?> x) { fcw.setCustomList(prefix + "harvestable.IDs", x); }
+	public void setHarvestableValues(List<?> x) { fcw.setCustomList(prefix + "harvestable.Values", x); }
+	public void setHarvestableVisible(List<?> x) { fcw.setCustomList(prefix + "harvestable.Visible", x); }
 	
-	public boolean getExploitPrevention() { return ccm.getBoolean(prefix + "exploitPrevention"); }
-	public int getLogCheckTime() { return ccm.getInt(prefix + "logCheckTime"); }
-	public double getBlockValueMinimum() { return ccm.getDouble(prefix + "blockValueMinimum"); }
-	public int getHarvestableFlux() { return ccm.getInt(prefix + "harvestableFlux"); }
+	public boolean getExploitPrevention() { return fcw.getBoolean(prefix + "exploitPrevention"); }
+	public int getLogCheckTime() { return fcw.getInt(prefix + "logCheckTime"); }
+	public double getBlockValueMinimum() { return fcw.getDouble(prefix + "blockValueMinimum"); }
+	public int getHarvestableFlux() { return fcw.getInt(prefix + "harvestableFlux"); }
 	
-	public String getHarvestableIDs() { return ccm.getString(prefix + "harvestable.IDs"); }
-	public String getHarvestableValues() { return ccm.getString(prefix + "harvestable.Values"); }
-	public String getHarvestableVisible() { return ccm.getString(prefix + "harvestable.Visible"); }
+	public String getHarvestableIDs() { return fcw.getString(prefix + "harvestable.IDs"); }
+	public String getHarvestableValues() { return fcw.getString(prefix + "harvestable.Values"); }
+	public String getHarvestableVisible() { return fcw.getString(prefix + "harvestable.Visible"); }
 	
 	public List<Integer> getHarvestableIDsIL() { return converter.getIntegerListFromString(getHarvestableIDs()); }
 	public List<Double> getHarvestableValuesIL() { return converter.getDoubleListFromString(getHarvestableValues()); }
@@ -63,11 +63,11 @@ public class MiningConfig extends ConfigGod
 		
 		try
 		{
-			while (lccm.getLocation(loggingPrefix + String.valueOf(day) + "." + matID + "." + count) != null)
+			while (lfcw.getLocation(loggingPrefix + String.valueOf(day) + "." + matID + "." + count) != null)
 				count++;
 		} catch (NullPointerException e) { }
 		
-		lccm.setLocation(loggingPrefix + String.valueOf(day) + "." + matID + "." + count, blockLocation.getWorld().getName(), blockLocation.getX(), blockLocation.getY(), blockLocation.getZ(),0,0);
+		lfcw.setLocation(loggingPrefix + String.valueOf(day) + "." + matID + "." + count, blockLocation.getWorld().getName(), blockLocation.getX(), blockLocation.getY(), blockLocation.getZ(),0,0);
 	}
 	
 	public boolean exploitCheck(int blockMatID, Location blockLoc)
@@ -97,7 +97,7 @@ public class MiningConfig extends ConfigGod
 		{
 			try
 			{
-				loc = lccm.getLocation(loggingPrefix + String.valueOf(day) + "." + id + "." + j);
+				loc = lfcw.getLocation(loggingPrefix + String.valueOf(day) + "." + id + "." + j);
 			} catch (NullPointerException e) {
 				break;
 			}
@@ -119,7 +119,7 @@ public class MiningConfig extends ConfigGod
 		{
 			if (i > day || i <= day - getLogCheckTime())
 			{
-				lccm.set(loggingPrefix + i, null);
+				lfcw.set(loggingPrefix + i, null);
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public class MiningConfig extends ConfigGod
 	{
 		super(FC_AEMCraft.plugin.getDataFolder().getAbsolutePath(), "Settings");
 		
-		lccm = new CustomConfigurationManager(FC_AEMCraft.plugin.getDataFolder().getAbsolutePath(), "Logging");
+		lfcw = new FileConfigurationWrapper(FC_AEMCraft.plugin.getDataFolder().getAbsolutePath(), "Logging");
 		
 		handleDefaults();
 	}
@@ -160,9 +160,9 @@ public class MiningConfig extends ConfigGod
 			setLogCheckTime(3);
 		}
 		
-		if (getVersion() < 1.4)
+		if (getVersion() < 1.5)
 		{
-			setVersion(1.4);
+			setVersion(1.5);
 		}
 		
 		loadSettings();

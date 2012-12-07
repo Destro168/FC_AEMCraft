@@ -5,10 +5,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import me.Destro168.Configs.MiningConfig;
-import me.Destro168.Configs.PlayerConfig;
-import me.Destro168.Messaging.MessageLib;
-import me.Destro168.Util.AEMCraftPermissions;
+import me.Destro168.FC_AEMCraft.Configs.MiningConfig;
+import me.Destro168.FC_AEMCraft.Configs.PlayerConfig;
+import me.Destro168.FC_Suite_Shared.ConfigManagers.FileConfigurationWrapper;
+import me.Destro168.FC_Suite_Shared.Leaderboards.Leaderboard;
+import me.Destro168.FC_Suite_Shared.Messaging.MessageLib;
 import net.milkbowl.vault.economy.Economy;
 
 import org.bukkit.Bukkit;
@@ -67,7 +68,7 @@ public class FC_AEMCraft extends JavaPlugin
 		
 		mc = new MiningConfig();
 		
-		Bukkit.getScheduler().scheduleAsyncRepeatingTask(this, new Runnable()
+		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable()
 		{
 			public void run()
 			{
@@ -96,7 +97,14 @@ public class FC_AEMCraft extends JavaPlugin
 		@EventHandler
 		public void onPlayerChat(AsyncPlayerChatEvent event)
 		{
-			playerConfigMap.get(event.getPlayer()).addChatLine();
+			Player p = event.getPlayer();
+			
+			playerConfigMap.get(p).addChatLine();
+			
+			//Update leaderboard for most played.
+			FileConfigurationWrapper fcw = new FileConfigurationWrapper(FC_AEMCraft.plugin.getDataFolder().getAbsolutePath(), "Leaderboards");
+			Leaderboard lb = new Leaderboard(fcw, "MostChatLines", "Most Chat Lines", "lines");
+			lb.attemptUpdate(p.getName(), playerConfigMap.get(p).getChatLines());
 		}
 	}
 	

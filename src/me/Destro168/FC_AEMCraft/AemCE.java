@@ -2,11 +2,12 @@ package me.Destro168.FC_AEMCraft;
 
 import java.util.List;
 
-import me.Destro168.Configs.PlayerConfig;
+import me.Destro168.FC_AEMCraft.Configs.PlayerConfig;
 import me.Destro168.FC_Suite_Shared.ArgParser;
 import me.Destro168.FC_Suite_Shared.NameMatcher;
-import me.Destro168.Messaging.MessageLib;
-import me.Destro168.Util.AEMCraftPermissions;
+import me.Destro168.FC_Suite_Shared.ConfigManagers.FileConfigurationWrapper;
+import me.Destro168.FC_Suite_Shared.Leaderboards.Leaderboard;
+import me.Destro168.FC_Suite_Shared.Messaging.MessageLib;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -55,8 +56,13 @@ public class AemCE implements CommandExecutor
 			return commandTrack();
 		else
 		{
+			if (ap.getArg(0).equalsIgnoreCase("mostPlayed"))
+				return commandMostPlayed();
+			else if (ap.getArg(0).equalsIgnoreCase("mostChatted"))
+				return commandMostChatted();
+			
 			if (perms.isAdmin() == false)
-				return msgLib.errorNoPermission();
+				return commandHelp();
 			
 			if (ap.getArg(0).equalsIgnoreCase("mList"))
 				return commandMList();
@@ -73,6 +79,32 @@ public class AemCE implements CommandExecutor
 		}
 		
 		return commandHelp();
+	}
+	
+	private boolean commandMostPlayed()
+	{
+		//Requires track permission to use.
+		if (perms.canTrack() == false)
+			return msgLib.errorNoPermission();
+		
+		//Update leaderboard
+		FileConfigurationWrapper fcw = new FileConfigurationWrapper(FC_AEMCraft.plugin.getDataFolder().getAbsolutePath(), "Leaderboards");
+		Leaderboard lb = new Leaderboard(fcw, "LongestPlayed", "Most Active", "seconds");
+		lb.displayLeaderboard(msgLib);
+		return true;
+	}
+	
+	private boolean commandMostChatted()
+	{
+		//Requires track permission to use.
+		if (perms.canTrack() == false)
+			return msgLib.errorNoPermission();
+		
+		//Update leaderboard
+		FileConfigurationWrapper fcw = new FileConfigurationWrapper(FC_AEMCraft.plugin.getDataFolder().getAbsolutePath(), "Leaderboards");
+		Leaderboard lb = new Leaderboard(fcw, "MostChatLines", "Most Chat Lines", "lines");
+		lb.displayLeaderboard(msgLib);
+		return true;
 	}
 	
 	private boolean commandTrack()
@@ -118,7 +150,6 @@ public class AemCE implements CommandExecutor
 		
 		return true;
 	}
-	
 	
 	private boolean commandMList()
 	{
@@ -278,8 +309,29 @@ public class AemCE implements CommandExecutor
 	
 	private boolean commandHelp()
 	{
-		msgLib.standardHeader("AEMCraft Custom Plugin Help");
-		msgLib.standardMessage("/aem [track/tracker]", "Track player lines of chat and see time played.");
+		boolean showOnce = false;
+		String header = "AEMCraft Custom Plugin Help";
+		
+		if (perms.canTrack() == true)
+		{
+			showOnce = true;
+			msgLib.standardHeader(header);
+			msgLib.standardMessage("/aem [track/tracker]", "See player lines of chat and time played.");
+			msgLib.standardMessage("/aem mostPlayed", "See top most active players.");
+			msgLib.standardMessage("/aem mostChatted", "See top most chatty players.");
+		}
+		
+		if (perms.isAdmin() == false)
+		{
+			if (perms.canTrack() == false)
+				msgLib.errorNoPermission();
+			
+			return true;
+		}
+		
+		if (showOnce == false)
+			msgLib.standardHeader(header);
+		
 		msgLib.standardMessage("/aem mList", "See information regarding minable minerals.");
 		msgLib.standardMessage("/aem mEP [true/false]", "Toggle exploit prevention setting.");
 		msgLib.standardMessage("/aem mMin [new val]", "Change exploit prevention and Material logging minimum value.");
