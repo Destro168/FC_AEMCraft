@@ -160,9 +160,9 @@ public class MiningConfig extends ConfigGod
 			setLogCheckTime(3);
 		}
 		
-		if (getVersion() < 1.5)
+		if (getVersion() < 1.51)
 		{
-			setVersion(1.5);
+			setVersion(1.51);
 		}
 		
 		loadSettings();

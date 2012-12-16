@@ -7,6 +7,7 @@ import java.util.Map;
 
 import me.Destro168.FC_AEMCraft.Configs.MiningConfig;
 import me.Destro168.FC_AEMCraft.Configs.PlayerConfig;
+import me.Destro168.FC_Suite_Shared.AutoUpdate;
 import me.Destro168.FC_Suite_Shared.ConfigManagers.FileConfigurationWrapper;
 import me.Destro168.FC_Suite_Shared.Leaderboards.Leaderboard;
 import me.Destro168.FC_Suite_Shared.Messaging.MessageLib;
@@ -75,6 +76,12 @@ public class FC_AEMCraft extends JavaPlugin
 				mc.clearOldLogs();	//Perform log clear checking every day.
 			}
 		}, 20, 1728000);
+		
+		try {
+			new AutoUpdate(this);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		FC_AEMCraft.plugin.getLogger().info("Successfully Enabled.");
 	}
