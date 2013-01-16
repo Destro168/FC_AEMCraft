@@ -1,6 +1,6 @@
 name: FC_AEMCraft
 main: me.Destro168.FC_AEMCraft.FC_AEMCraft
-version: 1.51
+version: 1.54
 description: Custom Plugin for FC_AEMCraft.
 commands:
    aem:

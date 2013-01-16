@@ -18,7 +18,7 @@ public class AEMCraftPermissions extends PermissionManager
 		if (isGlobalAdmin() == true)
 			return true;
 		
-		if (permission.playerHas(player, "FC_AEMCraft.admin"))
+		else if (permission.has(player, "FC_AEMCraft.admin"))
 			return true;
 		
 		return isConsole;
@@ -26,7 +26,10 @@ public class AEMCraftPermissions extends PermissionManager
 	
 	public boolean canTrack()
 	{
-		if (permission.playerHas(player, "FC_AEMCraft.track"))
+		if (isAdmin() == true)
+			return true;
+		
+		if (permission.has(player, "FC_AEMCraft.track"))
 			return true;
 		
 		return isConsole;

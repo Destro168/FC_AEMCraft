@@ -14,8 +14,8 @@
         <file path="/FC_AEMCraft/.classpath"/>
         <folder path="/FC_AEMCraft/Docs"/>
         <javaElement handleIdentifier="=FC_AEMCraft/src"/>
-        <file path="/FC_AEMCraft/fastSave.jardesc"/>
         <file path="/FC_AEMCraft/.project"/>
+        <file path="/FC_AEMCraft/fastSave.jardesc"/>
         <file path="/FC_AEMCraft/plugin.yml"/>
     </selectedElements>
 </jardesc>

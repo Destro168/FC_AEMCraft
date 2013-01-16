@@ -13,13 +13,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.craftbukkit.command.ColouredConsoleSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
 
 public class AemCE implements CommandExecutor
 {
 	private CommandSender sender;
-	private ColouredConsoleSender console;
 	private Player player;
 	private ArgParser ap;
 	private MessageLib msgLib;
@@ -37,13 +36,10 @@ public class AemCE implements CommandExecutor
 		if (sender instanceof Player)
 		{
 			player = (Player) sender;
-			msgLib = new MessageLib(player);
 			perms = new AEMCraftPermissions(player);
 		}
-		else if (sender instanceof ColouredConsoleSender)
+		else if (sender instanceof ConsoleCommandSender)
 		{
-			console = (ColouredConsoleSender) sender;
-			msgLib = new MessageLib(console);
 			perms = new AEMCraftPermissions(true);
 		}
 		else
@@ -51,6 +47,8 @@ public class AemCE implements CommandExecutor
 			FC_AEMCraft.plugin.getLogger().info("Unknown command sender, returning track command.");
 			return false;
 		}
+		
+		msgLib = new MessageLib(sender);
 		
 		if (ap.getArg(0).equalsIgnoreCase("track") || ap.getArg(0).equalsIgnoreCase("tracker"))
 			return commandTrack();

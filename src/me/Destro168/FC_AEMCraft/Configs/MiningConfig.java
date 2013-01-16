@@ -40,9 +40,9 @@ public class MiningConfig extends ConfigGod
 	public String getHarvestableValues() { return fcw.getString(prefix + "harvestable.Values"); }
 	public String getHarvestableVisible() { return fcw.getString(prefix + "harvestable.Visible"); }
 	
-	public List<Integer> getHarvestableIDsIL() { return converter.getIntegerListFromString(getHarvestableIDs()); }
-	public List<Double> getHarvestableValuesIL() { return converter.getDoubleListFromString(getHarvestableValues()); }
-	public List<Integer> getHarvestableVisibleIL() { return converter.getIntegerListFromString(getHarvestableVisible()); }
+	public List<Integer> getHarvestableIDsIL() { return fcw.getCustomIntegerList(prefix + "harvestable.IDs"); }
+	public List<Double> getHarvestableValuesIL() { return fcw.getCustomDoubleList(prefix + "harvestable.Values"); }
+	public List<Integer> getHarvestableVisibleIL() { return fcw.getCustomIntegerList(prefix + "harvestable.Visible"); }
 	
 	public void logBlock(int matID, Location blockLocation)
 	{
@@ -160,9 +160,9 @@ public class MiningConfig extends ConfigGod
 			setLogCheckTime(3);
 		}
 		
-		if (getVersion() < 1.51)
+		if (getVersion() < 1.54)
 		{
-			setVersion(1.51);
+			setVersion(1.54);
 		}
 		
 		loadSettings();
