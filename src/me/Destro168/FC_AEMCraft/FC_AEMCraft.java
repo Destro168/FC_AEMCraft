@@ -1,7 +1,6 @@
 package me.Destro168.FC_AEMCraft;
 
 import java.text.DecimalFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -151,22 +150,20 @@ public class FC_AEMCraft extends JavaPlugin
 				
 				FC_AEMCraft.economy.depositPlayer(player.getName(), reward);
 				
-				Date now = new Date();
-				
 				if (mc.harvestableVisible.get(event.getBlock().getTypeId()) == 1)
 				{
 					if (lastPayNotificationMap.containsKey(player))
 					{
-						if (now.getTime() - lastPayNotificationMap.get(player) > 2000)
+						if (System.currentTimeMillis() - lastPayNotificationMap.get(player) > 2000)
 						{
 							notifyPlayer(player, reward, event.getBlock().getType().toString().toLowerCase());
-							lastPayNotificationMap.put(player, now.getTime());
+							lastPayNotificationMap.put(player, System.currentTimeMillis());
 						}
 					}
 					else
 					{
 						notifyPlayer(player, reward, event.getBlock().getType().toString().toLowerCase());
-						lastPayNotificationMap.put(player, now.getTime());
+						lastPayNotificationMap.put(player, System.currentTimeMillis());
 					}
 				}
 				

@@ -33,13 +33,12 @@ public class PlayerConfig extends ConfigGod
 	public void storePlayedTime()
 	{
 		//Variable Declarations
-		Date now = new Date();
 		Long timeDifference;
 		int intDifference;
 		int timePlayedInSeconds = getPlayTime();
 		
 		//We want to first set how long we have played in the configuration file.
-		timeDifference = now.getTime() - logonDate.getTime(); //Calulate how long we have been online.
+		timeDifference = System.currentTimeMillis() - logonDate.getTime(); //Calulate how long we have been online.
 		intDifference = (int) (timeDifference / 1000); //Convert that time to seconds.
 		timePlayedInSeconds = timePlayedInSeconds + intDifference;	//Update time played.
 		fcw.set(prefix + "playTime", timePlayedInSeconds); //Store it

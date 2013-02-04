@@ -1,0 +1,5 @@
+~ FC_AEMCraft Permissions ~
+
+- FC_AEMCraft.admin -> Allows you to use the m-prefixed subcommands for /aem and everything else.
+- FC_AEMCraft.track -> Allows you to view player play time and lines of chat with /aem track [name]
+- FC_AEMCraft.reward -> Gives permission to recieve rewards from mining.

@@ -1,5 +1,9 @@
 ~ FC_AEMCraft Version History ~
 
+Version 1.54
+
+- Compatibility update for new FC_Suite_Shared
+
 Version 1.53:
 
 - Fixed tiny permission error to allow commands to work from console.
